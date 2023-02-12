@@ -1,0 +1,1 @@
+if (length <= 1) cout<<"Error! | The width must be greater than 1", exit(0);
