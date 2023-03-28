@@ -3,9 +3,7 @@
 #define ll long long
 using namespace std;
 
-struct road{
-    int v, w, f;
-};
+struct road{ int v, w, f; };
 
 vector<road> adj[100001];
 
@@ -33,16 +31,16 @@ int main() {
     cin.tie(NULL);
     int n, e;
     cin>>n>>e;
-    for(int i=0;i<e;i++) {
+    for(int i = 0;i < e; i++) {
         int u, v, w, f;
         cin>>u>>v>>w>>f;
-        adj[u].push_back({v, w, f});
-        adj[v].push_back({u, w, f});
+        adj[u].emplace_back(v, w, f);
+        adj[v].emplace_back(u, w, f);
     }
     vector<int> minDist(n+1, INT_MAX);
     priority_queue<pii, vector<pii>, greater<pii>> pq;
     minDist[1] = 0;
-    pq.push({0, 1});
+    pq.emplace(0, 1);
     while(!pq.empty()) {
         int currDis = pq.top().first;
         int curr = pq.top().second;
@@ -54,7 +52,7 @@ int main() {
 
             if(minDist[next]>currDis+dis) {
                 minDist[next] = currDis+dis;
-                pq.push({minDist[next], next});
+                pq.emplace(minDist[next], next);
             }
         }
     }

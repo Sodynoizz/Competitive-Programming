@@ -11,10 +11,10 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define dbg(...)
 #endif
 
-#define long long ll
+#define ll long long
 #define pii pair<int, int>
 #define mii map<int, int>
-#define vii vector<int, int>
+#define vii vector<pair<int, int>>
 #define gcd(a,b) __gcd(a,b)
 #define lcm(a,b) (a*(b/gcd(a,b)))
 #define all(x) (x).begin() , (x).end()
@@ -22,16 +22,15 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
+    ll res = 0;
     int n; cin >> n;
-    bool b[n];
-    for (int i=1; i<=n; i++) cin >> b[i];
-    int last = 1;
-    while (last <= n) {
-        int one = last;
-        while(!b[one]) one++;
-        for (int i=one; i>=last; i--) cout << i << " ";
-        if (one + 1 <= n) b[one + 1] = !b[one + 1];
-        last = one + 1;
-    }
+    int a[n], b[n];
+    for (int i = 1; i <= n; i++) cin >> a[i];
+    for (int i = 1; i <= n; i++) cin >> b[i];
+    sort(a + 1, a + n + 1); sort(b + 1, b + n + 1, greater<int>());
+    for (int i = 1; i <= n + 1; i++) a[i] = a[i] + b[i];
+    sort(a + 1, a + n + 1); 
+    for (int i = n - 1; i >= 1; i--) res += abs(a[i] - a[i + 1]);
+    cout << res;
     return 0;
 }

@@ -22,16 +22,15 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    int n; cin >> n;
-    bool b[n];
-    for (int i=1; i<=n; i++) cin >> b[i];
-    int last = 1;
-    while (last <= n) {
-        int one = last;
-        while(!b[one]) one++;
-        for (int i=one; i>=last; i--) cout << i << " ";
-        if (one + 1 <= n) b[one + 1] = !b[one + 1];
-        last = one + 1;
-    }
-    return 0;
+    string s1 = "AABAACAADAABAABA";
+    string s2 = "AABA";
+    int pos = 0, index;
+    vector<int> v;
+    while (s1.find(s2, pos) != string::npos) { v.emplace_back(index); pos = index + 1; }
+    
+    if (v.size()) { for (int i=0; i<v.size(); i++) cout << v[i] << endl; }
+    else cout << "No string matching found." ;
+    
+    while()
+       return 0;
 }
