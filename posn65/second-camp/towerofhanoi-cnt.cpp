@@ -10,3 +10,33 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #else
 #define dbg(...)
 #endif
+
+#define long long ll
+#define pii pair<int, int>
+#define mii map<int, int>
+#define vii vector<int, int>
+#define gcd(a,b) __gcd(a,b)
+#define lcm(a,b) (a*(b/gcd(a,b)))
+#define all(x) (x).begin() , (x).end()
+
+int cnt = 0;
+
+int towers(int n, char from, char to, char helper) {    
+    if (n == 0) return cnt;
+    else {
+        // A to B and use c for helping
+        towers(n - 1, from, helper, to);
+        cnt++;
+        // B to C and use a for helping
+        towers(n - 1, helper, to, from);
+    }
+    return cnt;
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    int n; cin >> n;
+    cout << towers(n, 'A', 'C', 'B');
+    return 0;
+}

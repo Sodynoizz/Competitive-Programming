@@ -11,6 +11,7 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define dbg(...)
 #endif
 
+#define long long ll
 #define pii pair<int, int>
 #define mii map<int, int>
 #define vii vector<int, int>
@@ -18,19 +19,32 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define lcm(a,b) (a*(b/gcd(a,b)))
 #define all(x) (x).begin() , (x).end()
 
+const int N = 5;
+int n, a[N][N], ans = INT_MAX;
+bool f[N];
+
+void rec(int cur, int cnt, int dist) {
+    if (cur == n  && cnt == n) return void(ans = min(ans, dist));
+    if (cnt > n || dist >= ans) return; 
+    for (int i = 1; i <= n; i++) {
+        if (cur != i && f[i]) {
+            f[i] = true;
+            rec(i, cnt + 1, dist + a[cur][i]);
+            f[i] = false;
+        }
+    }
+}
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    int n; cin >> n;
-    bool b[n];
-    for (int i=1; i<=n; i++) cin >> b[i];
-    int last = 1;
-    while (last <= n) {
-        int one = last;
-        while(!b[one]) one++;
-        for (int i=one; i>=last; i--) cout << i << " ";
-        if (one + 1 <= n) b[one + 1] = !b[one + 1];
-        last = one + 1;
+    cin >> n;
+    for (int i=1; i<=n; i++) {
+        for (int j=1; j<=n; j++) {
+            cin >> a[i][j];
+        }
     }
+    f[1] = 1; rec(1, 1, 0);
+    cout << ans;
     return 0;
 }

@@ -10,3 +10,33 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #else
 #define dbg(...)
 #endif
+
+#define long long ll
+#define pii pair<int, int>
+#define mii map<int, int>
+#define vii vector<int, int>
+#define gcd(a,b) __gcd(a,b)
+#define lcm(a,b) (a*(b/gcd(a,b)))
+#define all(x) (x).begin() , (x).end()
+int dp[10001][10001];
+
+int binomial(int n, int k) {
+    dp[0][0] = 1;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 0; j <= i; j++) {
+            if (j == 0 || j == i) dp[i][j] = 1;
+            else dp[i][j] = dp[i - 1][j - 1] + dp[i - 1][j];
+        }
+    }
+    return dp[n][k];
+}
+
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    int n, k; cin >> n >> k;
+    dp[n][k];
+    cout << binomial(n, k);
+    return 0;
+}   

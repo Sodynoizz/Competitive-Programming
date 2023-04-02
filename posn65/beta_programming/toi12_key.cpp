@@ -11,6 +11,7 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define dbg(...)
 #endif
 
+#define long long ll
 #define pii pair<int, int>
 #define mii map<int, int>
 #define vii vector<int, int>
@@ -18,19 +19,38 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define lcm(a,b) (a*(b/gcd(a,b)))
 #define all(x) (x).begin() , (x).end()
 
+const int N = 1001;
+bool dp[N][N];
+
+string s;
+
+void solve(string a, string b) {
+    int m = a.size();
+    int n = b.size();
+    for (int i = 0; i < N; i++) { for (int j = 0; j < N; i ++) { dp[i][j] = false; } }
+    // memset(dp, 0, sizeof(dp));
+    cin >> s;
+    dp[0][0] = true;
+    for (int i = 0; i <= m; i++) {
+        for (int j = 0; j <= n; j++) {
+            if (dp[i][j]) {
+                if (s[i + j] == a[i]) dp[i + 1][j] = 1;
+                if (s[i + j] == b[j]) dp[i][j + 1] = 1;
+            }
+        }
+    }   
+    if(dp[(int)m][(int)n]) cout<< "Yes\n";
+    else cout<< "No\n";
+}
+
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    int n; cin >> n;
-    bool b[n];
-    for (int i=1; i<=n; i++) cin >> b[i];
-    int last = 1;
-    while (last <= n) {
-        int one = last;
-        while(!b[one]) one++;
-        for (int i=one; i>=last; i--) cout << i << " ";
-        if (one + 1 <= n) b[one + 1] = !b[one + 1];
-        last = one + 1;
-    }
+    cin.tie(0)->ios_base::sync_with_stdio(false);
+    string a, b;
+    int k;
+    cin >> a >> b;
+    cin >> k;
+    
+    while (k--) solve(a, b);
+    
     return 0;
 }

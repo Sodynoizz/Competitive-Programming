@@ -10,3 +10,25 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #else
 #define dbg(...)
 #endif
+
+#define long long ll
+#define pii pair<int, int>
+#define mii map<int, int>
+#define vii vector<pair<int, int>>
+#define gcd(a,b) __gcd(a,b)
+#define lcm(a,b) (a*(b/gcd(a,b)))
+#define all(x) (x).begin() , (x).end()
+
+int n, cur, ans;
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    cin >> n;
+    vii v(n);
+    for (auto &[x, y]: v) cin >> x >> y;
+    sort(v.begin(), v.end());
+    for (auto &[x, y]: v) { if (x >= cur) ans += (y - x + 1), cur = y; }
+    cout << s;
+    return 0;
+}

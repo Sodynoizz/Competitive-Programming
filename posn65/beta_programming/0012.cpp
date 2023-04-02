@@ -11,6 +11,8 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define dbg(...)
 #endif
 
+#define endl '\n'
+#define ll long long
 #define pii pair<int, int>
 #define mii map<int, int>
 #define vii vector<int, int>
@@ -18,19 +20,36 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define lcm(a,b) (a*(b/gcd(a,b)))
 #define all(x) (x).begin() , (x).end()
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    int n; cin >> n;
-    bool b[n];
-    for (int i=1; i<=n; i++) cin >> b[i];
-    int last = 1;
-    while (last <= n) {
-        int one = last;
-        while(!b[one]) one++;
-        for (int i=one; i>=last; i--) cout << i << " ";
-        if (one + 1 <= n) b[one + 1] = !b[one + 1];
-        last = one + 1;
-    }
-    return 0;
+int main(){
+    string str;
+    cin >> str;
+    for(int w = 0; w < 5; w++){
+    	if(w == 0 || w == 4){
+    		cout << "..";
+    		for (int i = 1; i <= str.size(); i++){
+    			if (i%3==0) cout << '*';
+    			else cout << '#';
+    			if (i < str.size()) cout << "...";
+			}
+			cout << "..";
+		} else if(w == 1 || w == 3){
+			cout << ".";
+			for (int i = 1; i <= str.size(); i++){
+				if (i % 3 == 0) cout << "*.*";
+				else cout << "#.#";
+				cout << ".";
+			}
+		} else {
+            for (int  i = 1; i <= str.size(); i++) {
+				if (i % 3 == 0) cout << "*." << str[i-1] << ".";
+				else if ((i-1) % 3 == 0 && i != 1) cout << "." << str[i-1] << ".";
+				else cout<<"#."<<str[i-1]<<".";
+				if (i <= str.size()){
+					if (i % 3 == 0) cout << '*';
+					else if (i == str.size()) cout << '#';
+				}
+			}
+		}
+		cout << endl;
+	}
 }

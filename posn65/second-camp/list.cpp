@@ -11,6 +11,7 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define dbg(...)
 #endif
 
+#define long long ll
 #define pii pair<int, int>
 #define mii map<int, int>
 #define vii vector<int, int>
@@ -18,19 +19,34 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define lcm(a,b) (a*(b/gcd(a,b)))
 #define all(x) (x).begin() , (x).end()
 
+int node[5] = {34, 13, 52, 16, 12};
+
+int find(int key) {
+    for (int i=0; i<5; i++) {
+        if (node[i] == key) return i;
+    } 
+    return -1;
+}
+
+void printArray(int size) {
+    for (int i=0; i<size; i++) cout << node[i] << ' ';
+}
+
+void insert(int val, int pos) {
+    for (int i=4; i>=pos; i--) node[i+1] = node[i];
+    node[pos] = val;
+    printArray(5);
+}
+
+void _delete(int pos) { 
+    for (int i=pos; i<4; i++) node[i] = node[i+1];
+    printArray(4);
+}
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    int n; cin >> n;
-    bool b[n];
-    for (int i=1; i<=n; i++) cin >> b[i];
-    int last = 1;
-    while (last <= n) {
-        int one = last;
-        while(!b[one]) one++;
-        for (int i=one; i>=last; i--) cout << i << " ";
-        if (one + 1 <= n) b[one + 1] = !b[one + 1];
-        last = one + 1;
-    }
-    return 0;
+
+
+    return 0; 
 }

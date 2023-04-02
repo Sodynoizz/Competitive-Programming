@@ -11,6 +11,7 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define dbg(...)
 #endif
 
+#define long long ll
 #define pii pair<int, int>
 #define mii map<int, int>
 #define vii vector<int, int>
@@ -18,19 +19,31 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define lcm(a,b) (a*(b/gcd(a,b)))
 #define all(x) (x).begin() , (x).end()
 
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(0);
-    int n; cin >> n;
-    bool b[n];
-    for (int i=1; i<=n; i++) cin >> b[i];
-    int last = 1;
-    while (last <= n) {
-        int one = last;
-        while(!b[one]) one++;
-        for (int i=one; i>=last; i--) cout << i << " ";
-        if (one + 1 <= n) b[one + 1] = !b[one + 1];
-        last = one + 1;
+void BinarySearch(int arr[], int n, int first, int last) {
+    int mid;
+
+    if (first > last) {
+        cout << "Number not found";
+        return;
     }
-    return 0;
+
+    else {
+        mid = (first + last) / 2;
+        if (n == arr[mid]) {
+            cout << "Found " << n << "at position " << mid;
+            return;
+        }
+        else if (n < arr[mid]) BinarySearch(arr, n, first, mid - 1);
+        else BinarySearch(arr, n, mid + 1, last);
+    }
+}
+
+int main() {
+   ios_base::sync_with_stdio(false);
+   cin.tie(0);
+   
+   int arr[5] = {1, 2, 3, 4, 5};
+   BinarySearch(arr, 3, 0, 4);
+   
+   return 0;
 }

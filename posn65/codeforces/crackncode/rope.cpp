@@ -11,6 +11,7 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define dbg(...)
 #endif
 
+#define ll long long
 #define pii pair<int, int>
 #define mii map<int, int>
 #define vii vector<int, int>
@@ -18,19 +19,27 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define lcm(a,b) (a*(b/gcd(a,b)))
 #define all(x) (x).begin() , (x).end()
 
+ll cnt = 0;
+
+void findCombinations(ll target, vector<ll, ll> &currCombination, ll start) {
+    if (target == 0) { for (int i = 0; i < currCombination.size(); i++) cnt++; }
+    for (ll i = start; i <= target; i++) { 
+        currCombination.emplace_back(i);
+        findCombinations(target - i, currCombination, i);
+        currCombination.pop_back();
+    }
+    return cnt;
+}
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    int n; cin >> n;
-    bool b[n];
-    for (int i=1; i<=n; i++) cin >> b[i];
-    int last = 1;
-    while (last <= n) {
-        int one = last;
-        while(!b[one]) one++;
-        for (int i=one; i>=last; i--) cout << i << " ";
-        if (one + 1 <= n) b[one + 1] = !b[one + 1];
-        last = one + 1;
-    }
+    int N;
+    ll x;
+    cin >> N >> P;
+    cin >> x >> y >> z;
+    vector<ll> currentCombination = {0};
+    if (P == 0) { cout << findCombinations(x, currentCombination, 1); }
+
     return 0;
 }

@@ -11,6 +11,7 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define dbg(...)
 #endif
 
+#define long long ll
 #define pii pair<int, int>
 #define mii map<int, int>
 #define vii vector<int, int>
@@ -18,19 +19,44 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define lcm(a,b) (a*(b/gcd(a,b)))
 #define all(x) (x).begin() , (x).end()
 
+struct data {
+    int l, r, v;
+} d[1<<10];
+
+int n, amt;
+char c;
+priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+vector<char> m(10);
+
+void dfs(int loc, int val) {
+    if (__builtin_popcount(loc) == 1) {
+        bitset<4> b = val;
+        cout << m[log2(loc)] << ' ' << b << '\n';
+        return;
+    }
+    int nl = d[loc].l, nr = d[loc].r;
+    dfs(nl, 2 * val); dfs(nr, 2 * val + 1);
+}
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    int n; cin >> n;
-    bool b[n];
-    for (int i=1; i<=n; i++) cin >> b[i];
-    int last = 1;
-    while (last <= n) {
-        int one = last;
-        while(!b[one]) one++;
-        for (int i=one; i>=last; i--) cout << i << " ";
-        if (one + 1 <= n) b[one + 1] = !b[one + 1];
-        last = one + 1;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        cin >> m[i] >> amt;
+        d[1 << i].l = -1; d[1 << i].r = -1;
+        d[1 << i].v = amt;
+        pq.emplace(amt, 1 << i);
     }
+    while (pq.size() > 1) {
+        auto [fv, fl] = pq.top(); pq.pop();
+        auto [sv, sl] = pq.top(); pq.pop();
+        int nl = fl + sl, nv = fv + sv;
+        d[nl].l = fl;
+        d[nl].r = sl;
+        d[nl].v = nv;
+        pq.emplace(nv, nl);
+    }
+    dfs((1 << n) - 1, 0);
     return 0;
 }

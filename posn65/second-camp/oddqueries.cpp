@@ -11,6 +11,7 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define dbg(...)
 #endif
 
+#define long long ll
 #define pii pair<int, int>
 #define mii map<int, int>
 #define vii vector<int, int>
@@ -18,19 +19,37 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define lcm(a,b) (a*(b/gcd(a,b)))
 #define all(x) (x).begin() , (x).end()
 
+int a[200005];
+int b[200005];
+
+void solve() {
+    int p,q, r, s, t, sum=0;
+    cin>>p>>q;
+    for (int i=0; i<p; i++) {
+        cin>>a[i];
+        b[i] = a[i];
+    }
+    for (int j=0; j<q; j++) {
+        cin >> r >> s >> t;
+        sum = 0;
+        for (int k=r; k<=s; k++) a[k-1] = t;
+        for (int i=0; i<p; i++) sum += a[i];
+        
+
+        if (sum%2) cout << "YES\n"; else cout << "NO\n";    
+        for (int l=r; l<=s; l++) a[l-1] = b[l-1];
+    }
+
+    
+}
+
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    int n; cin >> n;
-    bool b[n];
-    for (int i=1; i<=n; i++) cin >> b[i];
-    int last = 1;
-    while (last <= n) {
-        int one = last;
-        while(!b[one]) one++;
-        for (int i=one; i>=last; i--) cout << i << " ";
-        if (one + 1 <= n) b[one + 1] = !b[one + 1];
-        last = one + 1;
-    }
+    
+    int n; cin>>n;
+    while (n--) solve();
+    
+
     return 0;
 }

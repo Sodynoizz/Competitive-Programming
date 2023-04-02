@@ -10,3 +10,25 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #else
 #define dbg(...)
 #endif
+
+#define long long ll
+#define pii pair<int, int>
+#define mii map<int, int>
+#define vii vector<int, int>
+#define gcd(a,b) __gcd(a,b)
+#define lcm(a,b) (a*(b/gcd(a,b)))
+#define all(x) (x).begin() , (x).end()
+
+int f[1000005] = {-1};
+
+int fibo(int n) {
+    if (n <= 1) return n;
+    if (f[n] == -1) f[n] = fibo(n - 1) + fibo(n - 2);
+    return f[n];
+}
+
+int main() {
+   cin.tie(0)->ios_base::sync_with_stdio(false);
+   int n; cin >> n; cout << fibo(n);
+   return 0;
+}

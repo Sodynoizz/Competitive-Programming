@@ -11,6 +11,7 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define dbg(...)
 #endif
 
+#define long long ll
 #define pii pair<int, int>
 #define mii map<int, int>
 #define vii vector<int, int>
@@ -22,15 +23,26 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
     int n; cin >> n;
-    bool b[n];
-    for (int i=1; i<=n; i++) cin >> b[i];
-    int last = 1;
-    while (last <= n) {
-        int one = last;
-        while(!b[one]) one++;
-        for (int i=one; i>=last; i--) cout << i << " ";
-        if (one + 1 <= n) b[one + 1] = !b[one + 1];
-        last = one + 1;
-    }
+    int a[n], dp[15];
+    vector<int> v;
+
+    for (int i = 1; i <= n; i++) { cin >> a[i]; dp[i] = a[i]; }
+    
+    v.emplace_back(dp[n]);
+
+    for (int i = 1; i <= n; i++) 
+        for (int j = 1; j <= n; j++) 
+            if (i + j == n) v.emplace_back(dp[i] + dp[j]);
+            
+        
+    for (int i = 1; i <= n; i++) 
+        for (int j = 1; j <= n; j++) 
+            for (int k = 1; k <= n; k++) 
+                if (i + j + k == n) 
+                    v.emplace_back(dp[i] + dp[j] + dp[k]);
+
+
+    for (int i = 1; i <=n; i++) if (n % i == 0) v.emplace_back(dp[i] * (n / i)); 
+    cout << *max_element(v.begin(), v.end());
     return 0;
 }

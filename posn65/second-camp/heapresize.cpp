@@ -5,8 +5,31 @@ template<typename T_container, typename T = typename enable_if<!is_same<T_contai
 
 void dbg_out() { cerr << endl; }
 template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { cerr << ' ' << H; dbg_out(T...); }
-#ifdef LOCAL
+
 #define dbg(...) cerr << '(' << #__VA_ARGS__ << '):', dbg_out(__VA_ARGS__)
-#else
-#define dbg(...)
-#endif
+
+#define gcd(a,b) __gcd(a,b)
+#define lcm(a,b) (a*(b/gcd(a,b)))
+#define all(x) (x).begin() , (x).end()
+
+template <typename T> void print(T x) { cout << x; }
+
+int *resize(int *ptr, int *size) {
+    int *temp = new int[2*(*size)];
+    for (int i=0; i<(*size); i++) {
+        temp[i] = ptr[i];
+        delete ptr;
+        ptr = temp;
+        (*size) *= 2;
+        return ptr;
+    }
+}
+
+int main() {
+    cin.tie(NULL) -> sync_with_stdio(false);
+    int sz = 5;
+    int *ptr = new int[sz];
+    for (int i=0; i<sz; i++) cin >> ptr[i];
+    ptr = resize(ptr, &sz);
+    cout << sz << endl;
+}

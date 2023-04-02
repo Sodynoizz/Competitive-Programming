@@ -10,3 +10,23 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #else
 #define dbg(...)
 #endif
+
+#define endl '\n'
+#define long long ll
+#define pii pair<int, int>
+#define mii map<int, int>
+#define vii vector<pair<int, int>>
+#define vi vector<int>
+#define gcd(a,b) __gcd(a,b)
+#define lcm(a,b) (a*(b/gcd(a,b)))
+#define all(x) (x).begin() , (x).end()
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    int sum = 0;
+    int arr[21] = {-4, -3, -1, 0, 1, 2, 6, 8, 11, 13, 14, 19, 20, 24, 26, 35, 48, 49, 80, 90, 92};
+    for (int i=0; i<21; i++) {  if (i == arr[i] - 1) cout << i + 1; }
+
+    return 0;
+}

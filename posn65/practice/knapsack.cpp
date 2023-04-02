@@ -10,3 +10,30 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #else
 #define dbg(...)
 #endif
+
+#define long long ll
+#define pii pair<int, int>
+#define mii map<int, int>
+#define vii vector<int, int>
+#define gcd(a,b) __gcd(a,b)
+#define lcm(a,b) (a*(b/gcd(a,b)))
+#define all(x) (x).begin() , (x).end()
+
+const int N = 10;
+int n, m, w[N], v[N], ans;
+
+void rec(int cur, int weight, int val) {
+    if (weight <= m) ans = max(ans, val);
+    if (weight > m) return;
+    for (int i = cur + 1; i <= n; i++) rec(i, weight + w[i], val + v[i]);
+}
+
+int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(0);
+    int n, m;
+    cin >> n >> m;
+    for (int i = 1; i <= n; i++) cin >> w[i] >> v[i];
+    for (int i = 1; i <= n; i++) rec(i, w[i], v[i]);
+    return 0;
+}
