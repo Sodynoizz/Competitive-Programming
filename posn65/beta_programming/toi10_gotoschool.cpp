@@ -11,7 +11,7 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define dbg(...)
 #endif
 
-#define long long ll
+#define ll long long
 #define pii pair<int, int>
 #define mii map<int, int>
 #define vii vector<int, int>
@@ -19,33 +19,20 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define lcm(a,b) (a*(b/gcd(a,b)))
 #define all(x) (x).begin() , (x).end()
 
-const int N = 1001;
-bool dp[INT_MAX][INT_MAX;
+bool mapping[55][55];
+ll dp[55][55];
 
-string s;
-
-void solve(int a, int b) {
-    int m = a.size(), b = b.size();
-    
-    cin >> s;
-    dp[0][0] = true;
-    for (int i = 0; i <= a.size(); i++) {
-        for (int j = 0; j <= b.size(); j++) {
-            if (dp[i][j]) {
-                if (s[i + j] == a[i]) dp[i + 1][j] = 1;
-                if (s[i + j] == b[j]) dp[i][j + 1] = 1;
-            }
+int main () {
+    int m,n,o,x,y;
+    cin >> m >> n >> o;
+    for (int i = 0 ; i < o ;i++) cin >> x >> y , mapping[x][y] = true;
+    dp[1][1] = 1;
+    for (int i = 1 ; i <= m ;i++)
+        for (int j = 1 ; j <= n ;j++){
+            if (mapping[i][j])
+                dp[i][j] = 0;
+            else
+                dp[i][j] += dp[i][j-1] + dp[i-1][j];
         }
-    }   
-    if (dp[a.size()][b.size()]) ? cout << "Yes\n"; : cout << "No\n";
-}
-
-int main() {
-    cin.tie(0)->ios_base::sync_with_stdio(false);
-    int a, b, k;
-    cin >> a >> b >> k;
-    memset(dp,0,sizeof(dp));
-    while (k--) solve(a, b)
-    
-    return 0;
+    cout << dp[m][n];
 }
