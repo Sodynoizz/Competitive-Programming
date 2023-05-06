@@ -2,4 +2,17 @@
 .cph/
 index.html
 template.cpp
+tempCodeRunnerFile.cpp
+statements/
 *.exe
+
+# These files aren't finish to code
+posn65/beta_programming/1004.cpp
+posn65/beta_programming/o59_may03_math.cpp
+
+# Will do a portfolio 1 year later
+index.js
+style.css
+
+# Shit file
+croissantsalad.txt
