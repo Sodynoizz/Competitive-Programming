@@ -16,7 +16,7 @@ int main() {
         vector<int> deg(n+1, 0);
         while(m--) {
             int u, v;
-            cin>>u>>v;
+            cin>>u>>v; 
             deg[u]++;
             deg[v]++;
         }

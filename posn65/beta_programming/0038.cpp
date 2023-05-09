@@ -12,7 +12,7 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #endif
 
 #define endl '\n'
-#define long long ll
+#define ll long long
 #define pii pair<int, int>
 #define mii map<int, int>
 #define vii vector<int, int>
@@ -20,19 +20,13 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 #define lcm(a,b) (a*(b/gcd(a,b)))
 #define all(x) (x).begin() , (x).end()
 
-vector<string> v;
-map<string, bool> mpp;
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0); 
     int n; cin >> n;   
-    for (int i = 0; i < n; i++) {
-        string s; cin >> s;
-        if (!mpp[s]) v.emplace_back(s);
-        mpp[s] = true;
-    }
-    sort(v.begin(), v.end());
-    for (auto i: v) cout << i << endl;
-    return 0;
+    string txt;
+    set<string> s;
+    while (n--) { cin >> txt; s.insert(txt); }
+    for (auto v: s) cout << v << endl;
 }
