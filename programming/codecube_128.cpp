@@ -4,7 +4,7 @@ using namespace std;
 #define boost cin.tie(nullptr)->ios_base::sync_with_stdio(false)
 
 const int N = 1e6 + 5;
-int a[N], l[N];
+int a[N], l[N]; 
 
 int main() {
     boost; int n; cin >> n;

@@ -22,10 +22,14 @@ template<typename Head, typename ... Tail> void dbg_out(Head H, Tail ... T) { ce
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(0);
-    string s; getline(cin, s);
-    for (int i = 0; i < s.size(); i++) {
-        if (s[i] == 'a' || s[i] == 'e' || s[i] == 'i' || s[i] == 'o' || s[i] == 'u') s[i] += 2;
-        else cout << s[i];
+    int d, m; cin >> d >> m;
+    while (m--) {
+        if (m == 1 || m == 3 || m == 5 || m == 7 || m == 8 || m == 10 || m == 12) d += 31;
+        if (m == 4 || m == 6 || m == 9 || m == 11) d += 30;
+        if (m == 2) d += 28;
     }
+    cout << d << '\n';
+    string day[7] = {"Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "Monday", "Tuesday"};
+    cout << day[d % 7];
     return 0;
 }

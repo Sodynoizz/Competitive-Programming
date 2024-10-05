@@ -29,6 +29,5 @@ int main() {
     for (auto &[x, y]: v) cin >> x >> y;
     sort(v.begin(), v.end());
     for (auto &[x, y]: v) { if (x >= cur) ans += (y - x + 1), cur = y; }
-    cout << s;
     return 0;
 }
